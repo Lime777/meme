@@ -36,6 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
+        subScribeToKeyboardWillHide()
         
     }
     
@@ -66,6 +67,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    func subscribeToKeyboardNotifications() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    
+    func subScribeToKeyboardWillHide() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func unsubscribeFromKeyboardNotifications() {
