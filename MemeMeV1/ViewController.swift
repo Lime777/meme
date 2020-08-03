@@ -8,8 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    struct Meme{
+        var topText: String
+        var bottomText: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+        
+    }
+
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -23,6 +31,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.topTextField.delegate = self
+        self.bottomTextField.delegate = self
         
         topTextField.text = "Top Text Field"
         bottomTextField.text = "Bottom Text Field"
@@ -38,11 +48,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         subscribeToKeyboardNotifications()
         subScribeToKeyboardWillHide()
         
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
     
     
@@ -55,6 +72,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    @IBAction func shareButton(_ sender: Any) {
+        let memedImage: UIImage = generateMemedImage()
+        
+        let shareSheet = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        
+        shareSheet.completionWithItemsHandler = { (_, completed, _, _) in
+            
+            if (completed) {
+                
+                self.save()
+                
+            }
+            
+        }
+        
+        present(shareSheet, animated: true, completion: nil)
+    
+}
+
+
     //This is a protocol method that grabs the users picked image and puts it on the UIImageView.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
@@ -64,8 +101,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         dismiss(animated: true, completion: nil)
     }
-   func subscribeToKeyboardNotifications() {
-
+    func subscribeToKeyboardNotifications() {
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
@@ -74,31 +111,65 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     func unsubscribeFromKeyboardNotifications() {
-
+        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        
     }
-    
     @objc func keyboardWillShow(_ notification:Notification) {
-
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        
+        if bottomTextField.isEditing, view.frame.origin.y == 0 {
+            
+            view.frame.origin.y -= getKeyboardHeight(notification)
+            
+        }
+        
     }
     
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification:Notification) {
         
-        view.frame.origin.y += getKeyboardHeight(notification)
-        
+        if bottomTextField.isEditing, view.frame.origin.y != 0 {
+            
+            view.frame.origin.y = 0
+            
+        }
+
     }
-
+    
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
+        
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
-   
 
+ 
+
+    func generateMemedImage() -> UIImage {
+
+        // TODO: Hide toolbar and navbar
+        navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        // TODO: Show toolbar and navbar
+        
+        navigationController?.setToolbarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+
+        return memedImage
+    }
+    func save(){
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+    
+    }
+    
     
 }
 
