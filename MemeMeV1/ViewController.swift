@@ -28,6 +28,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+
         return true
     }
     
@@ -73,6 +74,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareButton(_ sender: Any) {
+        
+        print("its kinda working")
+        
         let memedImage: UIImage = generateMemedImage()
         
         let shareSheet = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
@@ -82,9 +86,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if (completed) {
                 
                 self.save()
-                
+                print("it worked")
+            } else {
+                print("Check your code")
             }
             
+            self.dismiss(animated: true, completion: nil)
+             
         }
         
         present(shareSheet, animated: true, completion: nil)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -40,6 +40,9 @@
                                             <rect key="frame" x="289" y="7" width="85" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Share"/>
+                                            <connections>
+                                                <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4wG-9g-fXd"/>
+                                            </connections>
                                         </button>
                                         <connections>
                                             <action selector="shareButton:" destination="BYZ-38-t0r" id="MwJ-X5-2az"/>
@@ -60,6 +63,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="7ik-x8-cIo" id="EJp-D9-amb"/>
                         <outlet property="imagePickerView" destination="J0e-Vw-6f2" id="G0q-iq-5fC"/>
+                        <outlet property="shareButtonItem" destination="qLS-Be-5gS" id="9fr-K2-DWV"/>
                         <outlet property="topTextField" destination="iXD-FU-VHU" id="GMc-wE-Y2k"/>
                     </connections>
                 </viewController>
