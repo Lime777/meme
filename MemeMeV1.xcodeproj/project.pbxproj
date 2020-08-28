@@ -13,6 +13,7 @@
 		077F123724D26F46008CE812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077F123524D26F46008CE812 /* Main.storyboard */; };
 		077F123924D26F46008CE812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077F123824D26F46008CE812 /* Assets.xcassets */; };
 		077F123C24D26F46008CE812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077F123A24D26F46008CE812 /* LaunchScreen.storyboard */; };
+		07E5528724F84FB0009EAF10 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E5528624F84FB0009EAF10 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		077F123824D26F46008CE812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		077F123B24D26F46008CE812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		077F123D24D26F46008CE812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07E5528624F84FB0009EAF10 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				077F122F24D26F46008CE812 /* AppDelegate.swift */,
 				077F123124D26F46008CE812 /* SceneDelegate.swift */,
 				077F123324D26F46008CE812 /* ViewController.swift */,
+				07E5528624F84FB0009EAF10 /* Meme.swift */,
 				077F123524D26F46008CE812 /* Main.storyboard */,
 				077F123824D26F46008CE812 /* Assets.xcassets */,
 				077F123A24D26F46008CE812 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				077F123424D26F46008CE812 /* ViewController.swift in Sources */,
+				07E5528724F84FB0009EAF10 /* Meme.swift in Sources */,
 				077F123024D26F46008CE812 /* AppDelegate.swift in Sources */,
 				077F123224D26F46008CE812 /* SceneDelegate.swift in Sources */,
 			);

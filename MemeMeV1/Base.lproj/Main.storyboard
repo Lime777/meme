@@ -86,6 +86,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomTextField" destination="7ik-x8-cIo" id="EJp-D9-amb"/>
+                        <outlet property="cameraButton" destination="QTD-K5-1gd" id="rGx-Al-pyj"/>
                         <outlet property="imagePickerView" destination="J0e-Vw-6f2" id="G0q-iq-5fC"/>
                         <outlet property="share" destination="Dgw-8m-ghP" id="Nel-3w-ocg"/>
                         <outlet property="toolBar" destination="lMb-fr-mwj" id="iGJ-vi-oKe"/>

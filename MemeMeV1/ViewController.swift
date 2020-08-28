@@ -11,16 +11,6 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
-    
-    struct Meme {
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-        
-    }
-    
-    
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -32,20 +22,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var share: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
-        
-        topTextField.text = "Enter Text Here"
-        bottomTextField.text = "Enter Text Here"
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.clearsOnBeginEditing = true
-        bottomTextField.clearsOnBeginEditing = true
+        setupTextField(topTextField, "Enter Meme Text")
+        setupTextField(bottomTextField, "Enter Meme Text")
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
     }
     
@@ -71,52 +55,35 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //This action/button finds its way to the UIImagePickerController and into the photoLibrary source
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-        
+        pickFromSource(.photoLibrary)
     }
     
     
     @IBAction func camera(_ sender: UIButton) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-            
-            present(imagePicker, animated: true, completion: nil)
-        } else {
-            sender.isEnabled = false
-        }
-        
+        pickFromSource(.camera)
     }
     
     
     @IBAction func share(_ sender: UIButton) {
         
-        
-        
         let memedImage: UIImage = generateMemedImage()
-        
         
         let shareSheet = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
         shareSheet.excludedActivityTypes = [.postToFacebook, .postToTwitter, .message, .mail]
-
+        
         shareSheet.completionWithItemsHandler = { (_, completed, _, _) in
-
+            
             if (completed) {
-
+                
                 self.save()
                 print("it worked")
             } else {
                 print("Check your code")
             }
-
+            
             self.dismiss(animated: true, completion: nil)
-
+            
         }
         
         present(shareSheet, animated: true, completion: nil)
@@ -186,7 +153,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    
     func generateMemedImage() -> UIImage {
         
         // TODO: Hide toolbar and navbar
@@ -201,16 +167,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         toolBar.isHidden = false
         
-        
         navigationController?.setToolbarHidden(true, animated: true)
         
         return memedImage
     }
+    
     func save(){
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
         
     }
     
+    func setupTextField(_ textField: UITextField, _ defaultText: String) {
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.text = defaultText
+        textField.clearsOnBeginEditing = true
+        
+    }
+    
+    func pickFromSource(_ source: UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self;
+        imagePicker.sourceType = source
+        present(imagePicker, animated: true, completion: nil)
+    }
     
 }
 
