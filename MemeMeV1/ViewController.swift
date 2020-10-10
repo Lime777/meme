@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var share: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var canelButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    @IBAction func share(_ sender: UIButton) {
+    @IBAction func share(_ sender: Any) {
         
         let memedImage: UIImage = generateMemedImage()
         
@@ -92,9 +93,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancel(_ sender: Any) {
         
-        topTextField.text = "Enter Text Here"
-        bottomTextField.text = "Enter Text Here"
-        imagePickerView.image = .none
+       dismiss(animated: true)
         
     }
     
@@ -173,7 +172,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func save(){
-        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+
+        
+        // Create the meme
+         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+         // Add it to the memes array in the Application Delegate
+         let object = UIApplication.shared.delegate
+         let appDelegate = object as! AppDelegate
+         appDelegate.memes.append(meme)
         
     }
     
