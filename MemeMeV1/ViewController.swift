@@ -36,6 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         subscribeToKeyboardNotifications()
         subScribeToKeyboardWillHide()
         
@@ -96,6 +97,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
        dismiss(animated: true)
         
     }
+
     
     //This is a protocol method that grabs the users picked image and puts it on the UIImageView.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -177,9 +179,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Create the meme
          let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
          // Add it to the memes array in the Application Delegate
-         let object = UIApplication.shared.delegate
-         let appDelegate = object as! AppDelegate
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
          appDelegate.memes.append(meme)
+        dismiss(animated: true, completion: nil)
         
     }
     

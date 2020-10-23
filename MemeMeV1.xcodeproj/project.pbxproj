@@ -16,6 +16,8 @@
 		07E5528724F84FB0009EAF10 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E5528624F84FB0009EAF10 /* Meme.swift */; };
 		07ED763D253133B20047F6CF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED763C253133B20047F6CF /* CollectionViewController.swift */; };
 		07ED7641253136020047F6CF /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED7640253136020047F6CF /* CollectionViewCell.swift */; };
+		07F5FED42535057100CACD31 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5FED32535057100CACD31 /* TableViewController.swift */; };
+		07F5FEDD2535092700CACD31 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5FEDC2535092700CACD31 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		07E5528624F84FB0009EAF10 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		07ED763C253133B20047F6CF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		07ED7640253136020047F6CF /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		07F5FED32535057100CACD31 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		07F5FEDC2535092700CACD31 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 				077F122F24D26F46008CE812 /* AppDelegate.swift */,
 				077F123124D26F46008CE812 /* SceneDelegate.swift */,
 				077F123324D26F46008CE812 /* ViewController.swift */,
+				07F5FED32535057100CACD31 /* TableViewController.swift */,
+				07F5FEDC2535092700CACD31 /* TableViewCell.swift */,
 				07ED763C253133B20047F6CF /* CollectionViewController.swift */,
 				07ED7640253136020047F6CF /* CollectionViewCell.swift */,
 				07E5528624F84FB0009EAF10 /* Meme.swift */,
@@ -148,6 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				077F123424D26F46008CE812 /* ViewController.swift in Sources */,
+				07F5FEDD2535092700CACD31 /* TableViewCell.swift in Sources */,
+				07F5FED42535057100CACD31 /* TableViewController.swift in Sources */,
 				07E5528724F84FB0009EAF10 /* Meme.swift in Sources */,
 				07ED7641253136020047F6CF /* CollectionViewCell.swift in Sources */,
 				077F123024D26F46008CE812 /* AppDelegate.swift in Sources */,
