@@ -67,28 +67,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     @IBAction func share(_ sender: Any) {
-        
-        let memedImage: UIImage = generateMemedImage()
-        
-        let shareSheet = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        
-        shareSheet.excludedActivityTypes = [.postToFacebook, .postToTwitter, .message, .mail]
-        
-        shareSheet.completionWithItemsHandler = { (_, completed, _, _) in
-            
-            if (completed) {
-                
+       
+    
+        let memeImage: UIImage = generateMemedImage()
+        let controller = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
+
+        controller.completionWithItemsHandler = {( type, ok, items, error ) in
+            if ok {
                 self.save()
-                print("it worked")
-            } else {
-                print("Check your code")
             }
-            
-            self.dismiss(animated: true, completion: nil)
-            
         }
-        
-        present(shareSheet, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
+    
     }
     
     
@@ -154,8 +144,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
+    
+    
+    
+    
+    
     func generateMemedImage() -> UIImage {
-        
+
         // TODO: Hide toolbar and navbar
         toolBar.isHidden = true
         // Render view to an image
@@ -163,25 +158,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
+
         // TODO: Show toolbar and navbar
-        
+
         toolBar.isHidden = false
-        
+
         navigationController?.setToolbarHidden(true, animated: true)
-        
+
         return memedImage
+
+
+
     }
     
     func save(){
 
-        
+
         // Create the meme
          let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
          // Add it to the memes array in the Application Delegate
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-         appDelegate.memes.append(meme)
+        appDelegate.memes.append(meme)
         dismiss(animated: true, completion: nil)
         
     }

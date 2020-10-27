@@ -51,13 +51,8 @@ class CollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         let meme = appDelegate.memes[indexPath.row]
-        cell.cellImageView.image = meme.originalImage
+        cell.cellImageView.image = meme.memedImage
         return cell
     }
-    
-    
-//    override func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-//        true
-//
-//    }
+
 }

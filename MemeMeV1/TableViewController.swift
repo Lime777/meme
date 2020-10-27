@@ -15,6 +15,8 @@ class TableViewController: UITableViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -36,7 +38,7 @@ class TableViewController: UITableViewController {
         
         cell.tableViewImage.image = meme.memedImage
         cell.tableViewLabel.text = meme.topText
-        cell.tableViewLabelTwo.text = meme.bottomText
+//        cell.tableViewLabelTwo.text = meme.bottomText
         
         return cell
         

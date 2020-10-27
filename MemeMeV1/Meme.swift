@@ -10,6 +10,7 @@ import Foundation
 
 
 struct Meme {
+  
     var topText: String
     var bottomText: String
     var originalImage: UIImage
